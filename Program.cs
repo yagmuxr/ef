@@ -42,7 +42,9 @@ namespace yeniyeni
             // AddProduct();
             // GetAllProducts();
             // GetProductById(1);
-            GetProductByName("5");
+            // GetProductByName("5");
+            // UpdateProduct();
+            DeleteProduct(2);
         }
 
         static void AddProducts()
@@ -110,6 +112,61 @@ namespace yeniyeni
                 System.Console.WriteLine($"name: {product.Name} price: {product.Price}");
                 }
             }
+        }
+        static void UpdateProduct()
+        {
+            using(var db = new ShopContext())
+            {
+                var p = db.Products.Where(p => p.ProductId ==1).FirstOrDefault();
+                if(p!=null)
+                {
+                    p.Price=2400;
+                    db.Products.Update(p); //tüm satırlar güncellenir. o yğzden aşağıdakini kullanmak daha mmantıklı, sadece güncellenmek istenen satır güncellenir.
+                    db.SaveChanges();
+                    System.Console.WriteLine("guncellendi");
+                }
+            }
+            // using(var db = new ShopContext())
+            // {
+            //     var entity = new Product(){ProductId=1};
+            //     db.Products.Attach(entity); //bir tracking başlatır!
+            //     entity.Price = 3000;
+            //     db.SaveChanges();
+            //     System.Console.WriteLine("guncellendi.");
+            // }
+            // using(var db= new ShopContext())
+            // {
+            
+            //     var p =db.Products.Where(i => i.ProductId == 2).FirstOrDefault();
+            //     if(p!=null)
+            //     {
+            //         p.Price*=1.2m;
+            //         db.SaveChanges();
+            //         System.Console.WriteLine("güncelleme yapıldı.");
+            //     }
+            // }
+        }
+        static void DeleteProduct(int id)
+        {
+            using(var db = new ShopContext())
+          {
+            var p = new Product(){ProductId=6};
+            db.Products.Remove(p);
+            // db.Entry(p).State = EntityState.Deleted;
+            db.SaveChanges();
+
+            
+          }
+        //   using(var db = new ShopContext())
+        //   {
+        //     var p = db.Products.Where(i => i.ProductId ==id).FirstOrDefault();
+        //     if(p!=null)
+        //     {
+        //        db.Products.Remove(p);
+        //        db.SaveChanges();
+        //        System.Console.WriteLine("silindi.");
+        //     }
+        //   }
         }
     }
 }
