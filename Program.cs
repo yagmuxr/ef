@@ -36,7 +36,40 @@ internal class Program
     }
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World!");
+        
+    }
+    static void AddProduct()
+    {
+        using(var db=new ShopContext())
+        {
+            var products = new List<Product>()
+            {
+             ,
+             new Product{ Name="Samsung S7", Price=4000},
+             new Product{ Name="Samsung S8", Price=5000},
+             new Product{ Name="Samsung S9", Price=6000}
+            };
+            // foreach(var p in products)
+            // {
+            //     db.Products.Add(p);
+            // }
+            db.Products.AddRange(products);
+            
+            db.SaveChanges();
+            System.Console.WriteLine(  "Veriler eklendi.");
+        }
+        static void AddProduct()
+        {
+        using(var db=new ShopContext())
+        {
+            var products = new Product{ Name="Samsung S7", Price=4000};
+            db.Products.Add(products);
+            
+            db.SaveChanges();
+            System.Console.WriteLine(  "Veriler eklendi.");
+        }
+
+        }
     }
 }
 }
