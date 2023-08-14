@@ -12,10 +12,11 @@ namespace yeniyeni
         {
             public DbSet<Product> Products { get; set; }
             public DbSet<Category> Categories { get; set; }
+            public DbSet<Order> Orders {get; set;}
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder.UseSqlite("Data Source=shop.db");
+                optionsBuilder.UseSqlServer(@"Data Source=YAGMURSMATEBOOK\SQLEXPRESS;Initial Catalog=ShopDb;Integrated Security=SSPI; TrustServerCertificate=true");
             }
         }
 
@@ -28,6 +29,7 @@ namespace yeniyeni
             public string Name { get; set; }
 
             public decimal Price { get; set; }
+            public int CategoryId { get; set; }
         }
 
         public class Category
@@ -35,16 +37,22 @@ namespace yeniyeni
             public int Id { get; set; }
             public string Name { get; set; }
         }
+        public class Order
+        {
+            public int OrderId { get; set;}
+            public int ProductId { get; set; }
+            public DateTime DateAdded { get; set; }
+        }
 
         static void Main(string[] args)
         {
-            // AddProducts();
+            AddProducts();
             // AddProduct();
             // GetAllProducts();
             // GetProductById(1);
             // GetProductByName("5");
             // UpdateProduct();
-            DeleteProduct(2);
+            // DeleteProduct(2);
         }
 
         static void AddProducts()
