@@ -13,12 +13,31 @@ namespace yeniyeni
             public DbSet<Product> Products { get; set; }
             public DbSet<Category> Categories { get; set; }
             public DbSet<Order> Orders {get; set;}
+            public DbSet<User> Users {get;set;}
+            public DbSet<Address> Addresses {get; set;}
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
                 optionsBuilder.UseSqlServer(@"Data Source=YAGMURSMATEBOOK\SQLEXPRESS;Initial Catalog=ShopDb;Integrated Security=SSPI; TrustServerCertificate=true");
             }
         }
+        public class User
+        {
+            public int Id { get; set; }
+            public string Username { get; set; }
+            public string Email { get; set; }
+            public List<Address> Addresses { get; set; }
+        }
+        public class Address
+        {
+            public int Id { get; set; }
+            public string Fullname { get; set; }
+            public string Title { get; set; }
+            public string Body { get; set; }
+            public User User {get;set;}
+            public int? UserId { get; set; }
+        }
+
 
         public class Product
         {
@@ -46,7 +65,7 @@ namespace yeniyeni
 
         static void Main(string[] args)
         {
-            AddProducts();
+            // AddProducts();
             // AddProduct();
             // GetAllProducts();
             // GetProductById(1);

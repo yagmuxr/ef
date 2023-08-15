@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using yeniyeni;
 
@@ -11,9 +12,11 @@ using yeniyeni;
 namespace yeniyeni.Migrations
 {
     [DbContext(typeof(Program.ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20230814104924_OnetoManyRelationship")]
+    partial class OnetoManyRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
